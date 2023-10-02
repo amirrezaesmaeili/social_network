@@ -1,6 +1,6 @@
 from django import forms
 
 class RegisterationForm(forms.Form):
-    user_name = forms.CharField()
-    email = forms.EmailField()
-    password = forms.CharField()
+    user_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control' }))
