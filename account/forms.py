@@ -14,3 +14,5 @@ class RegisterationForm(forms.Form):
         if user :
             raise ValidationError(" this email has been exists ")
         return email
+    
+    
