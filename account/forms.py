@@ -15,4 +15,9 @@ class RegisterationForm(forms.Form):
             raise ValidationError(" this email has been exists ")
         return email
     
-    
+    def clean_user_name(self):
+        user_name = self.cleaned_data['user_name']
+        user = User.objects.filter(username=user_name).exists()
+        if user :
+            raise ValidationError("this username has been exists")
+        return user_name
