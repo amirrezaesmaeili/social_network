@@ -3,7 +3,7 @@ from django.views import View
 from .forms import RegisterationForm,LoginForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout
 
 class UserRegisterView(View):
     form_class = RegisterationForm
@@ -41,8 +41,16 @@ class UserLoginView(View):
                 login(request,user)
                 messages.success(request , "you login successfuly" , "success")
                 return redirect("home:home")
-            messages.error(request , "password or username not correct" 'warning')
-        return render(request ,self.form_class,{'form':form})
+            messages.error(request , "password or username not correct" , 'warning')
+        return render(request ,self.template_name,{'form':form})
+    
+
+class UserLogoutView(View):
+    def get(self,request):
+        logout(request)
+        messages.success(request,"you logout successfuly", "success")
+        return redirect("home:home")
+
     
     
 
