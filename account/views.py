@@ -1,3 +1,5 @@
+from typing import Any
+from django import http
 from django.shortcuts import render,redirect
 from django.views import View
 from .forms import RegisterationForm,LoginForm
@@ -8,6 +10,11 @@ from django.contrib.auth import login,authenticate,logout
 class UserRegisterView(View):
     form_class = RegisterationForm
     template_name = 'account/register.html'
+
+    def dispatch(self, request , *args,**kwargs):
+        if request.user.is_authenticated:
+            return redirect("home:home")
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self,request):
         form = self.form_class
@@ -27,6 +34,10 @@ class UserLoginView(View):
     form_class = LoginForm
     template_name = "account/login.html"
 
+    def dispatch(self, request , *args,**kwargs):
+        if request.user.is_authenticated:
+            return redirect("home:home")
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self,request):
         form = self.form_class 
