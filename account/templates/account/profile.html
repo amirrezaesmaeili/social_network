@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
- <h2 class="text-center"> {{request.user}} </h2> 
- {% for post in posts %}
+   <h2 class="text-center"> {{ user.username }} </h2> 
+   <div class="card">
+      {% for post in posts %}
  
-    <a href="{{post.get_absolute_url}}" class="card-body">{{post.body|truncatewords:7}}</a>
- {% endfor %}  
+         <a href="{{post.get_absolute_url}}" class="card-body">{{post.body|truncatewords:7}}</a>
+      {% endfor %}
+   </div>  
 {% endblock content %}
